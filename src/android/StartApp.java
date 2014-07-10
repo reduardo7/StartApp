@@ -1,4 +1,4 @@
-package com.example.test;
+package com.surfernetwork.startapp;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
