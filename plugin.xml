@@ -21,6 +21,6 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/StartApp.java" target-dir="src/com/surfernetwork/fstartapp" />
+        <source-file src="src/android/StartApp.java" target-dir="src/com/surfernetwork/startapp" />
      </platform>          
 </plugin>
