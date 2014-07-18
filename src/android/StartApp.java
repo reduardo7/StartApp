@@ -88,9 +88,9 @@ import android.widget.Toast;
 									{
 										Log.d("StartApp"," call instagram");
 										//String sappurl="instagram://instagram.com/datummobile";
-										String sappurl="http://instagram.com/datummobile";
+										//String sappurl="http://instagram.com/datummobile";
 										//openInstagram(appid,apptype,sappurl);
-										openInstagram(appid,apptype,sappurl);
+										openInstagram(appid,apptype,appurl);
 									}
 								callbackContext.success();
 				                
