@@ -19,8 +19,8 @@ This plugin will retun the file contents in string format after downloading and 
 
 e.g
 
-AppType                                 UrlScheme
--------                                 ---------
+AppType					UrlScheme
+-------					---------
 
 facebook                                fb
 
