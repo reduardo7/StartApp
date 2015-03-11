@@ -17,6 +17,18 @@ It supports Phonegap 3.0 and above
 
 This plugin will retun the file contents in string format after downloading and coping on to device.
 
+e.g
+
+AppType                                 UrlScheme
+-------                                 ---------
+
+facebook                                fb
+twitter                                 twitter
+youtube                                 youtube
+myspace                                 myspace
+instagram                               instagram
+linkedin                                linkedin
+
 From index.js you may call plugin by passing parameters.
 
 
@@ -29,6 +41,6 @@ var successcall = function(result) {
     };
     window.startapp.start(
                         {
-                          result:'success', appid:'com.twitter.android',apptype:'twitter',appurl:'https://twitter.com/mshahidjanjua'
+                          result:'success', appid:'com.atebits.Tweetie2',apptype:'twitter',urlscheme:'twitter',appurl:'https://twitter.com/mshahidjanjua'
                          },successcall,failurecall);
-
+    
