@@ -27,8 +27,11 @@ facebook                                fb
 twitter                                 twitter
 
 youtube                                 youtube
+
 myspace                                 myspace
+
 instagram                               instagram
+
 linkedin                                linkedin
 
 From index.js you may call plugin by passing parameters.
