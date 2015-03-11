@@ -15,9 +15,8 @@ NSString  *SART_SUCCESS_PARAMETER=@"success";
 NSString *appresult=NULL;
 NSString *appid=NULL;
 NSString *apptype=NULL;
+NSString *urlscheme=NULL;
 NSString *appurl=NULL;
-
-NSMutableDictionary *urlSchemesDict;
 
 
 CDVPluginResult* apppluginResult = nil;
@@ -28,8 +27,7 @@ CDVPluginResult* apppluginResult = nil;
     
     NSLog(@"method= %@", command.methodName);
     NSLog(@"SART_ACTION_MESSAGE= %@", SART_ACTION_MESSAGE);
-    urlSchemesDict=[NSMutableDictionary dictionaryWithDictionary:@{@"twitter":@"twitter",@"facebook":@"fb",@"youtube":@"http",@"instagram":@"instagram" }];
-
+    
     
     if([[SART_ACTION_MESSAGE uppercaseString] isEqualToString:[command.methodName uppercaseString]])
     {
@@ -50,11 +48,13 @@ CDVPluginResult* apppluginResult = nil;
                 resultType=[strDict valueForKey:@"result"];
                 appid=[strDict valueForKey:@"appid"];
                 apptype=[strDict valueForKey:@"apptype"];
+                urlscheme=[strDict valueForKey:@"urlscheme"];
                 appurl=[strDict valueForKey:@"appurl"];
                 
                 NSLog(@"resultType value json= %@", resultType);
                 NSLog(@"appid value json= %@", appid);
                 NSLog(@"apptype value json= %@", apptype);
+                NSLog(@"urlscheme value json= %@", urlscheme);
                 NSLog(@"appurl value json= %@", appurl);
                 
             }
@@ -69,12 +69,15 @@ CDVPluginResult* apppluginResult = nil;
                 NSLog(@"StartApp before call");
                 NSString *typeurl;
                 //Replace http or https with url scheme
+                
                 if([appurl rangeOfString:@"https"].length!=0)
                 {
-                    typeurl=[appurl stringByReplacingOccurrencesOfString:@"https" withString:urlSchemesDict[apptype]];
+                    typeurl=[appurl stringByReplacingOccurrencesOfString:@"https" withString:urlscheme];
+
                 }
                 else{
-                    typeurl=[appurl stringByReplacingOccurrencesOfString:@"http" withString:urlSchemesDict[apptype]];
+                    
+                    typeurl=[appurl stringByReplacingOccurrencesOfString:@"http" withString:urlscheme];
                     
                 }
                 
