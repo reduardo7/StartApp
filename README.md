@@ -23,7 +23,9 @@ AppType                                 UrlScheme
 -------                                 ---------
 
 facebook                                fb
+
 twitter                                 twitter
+
 youtube                                 youtube
 myspace                                 myspace
 instagram                               instagram
