@@ -106,7 +106,7 @@ CDVPluginResult* apppluginResult = nil;
             }
             else{
                 
-                apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+                apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Error: App not found"];
                 NSLog(@"StartApp error ");
                 
             }
