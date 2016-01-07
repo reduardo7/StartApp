@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
            id="com.surfernetwork.startapp"
-      version="1.1.0">
+      version="1.1.1">
     <name>StartApp</name>
     <description>PhoneGap StartApp</description>
     <license>MIT</license>
