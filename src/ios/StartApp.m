@@ -95,6 +95,9 @@ CDVPluginResult* apppluginResult = nil;
                 }
                 else{
                     apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+                    //app not found load url in browser
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appurl]];
+                    
                     
                 }
                 
