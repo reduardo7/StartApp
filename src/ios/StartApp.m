@@ -101,10 +101,19 @@ CDVPluginResult* apppluginResult = nil;
                     apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:resultType];
                 }
                 else{
-                    apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-                    //app not found load url in browser
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appurl]];
-                    
+                        //app not found load url in browser
+                    @try {
+                        getAppResult=[[UIApplication sharedApplication] openURL:[NSURL URLWithString:appurl]];
+                        
+                        apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:resultType];
+                        
+                    }
+                    @catch (NSException *e) {
+                        NSLog(@"StartApp app error %@", e.description);
+                        getAppResult=NO;
+                        apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Error: App not found"];
+                        
+                    }
                     
                 }
                 
