@@ -85,7 +85,14 @@ CDVPluginResult* apppluginResult = nil;
                 
                 //Try to load url scheme
 
-                getAppResult=[[UIApplication sharedApplication] openURL:[NSURL URLWithString:typeurl]];
+                @try {
+                    getAppResult=[[UIApplication sharedApplication] openURL:[NSURL URLWithString:typeurl]];
+                    
+                }
+                @catch (NSException *e) {
+                    NSLog(@"StartApp app error %@", e.description);
+                    getAppResult=NO;
+                }
                 
                 NSLog(@"StartApp after call");
                 
