@@ -85,24 +85,15 @@ CDVPluginResult* apppluginResult = nil;
                 
                 //Try to load url scheme
                 @try {
-                    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:typeurl]])
-                    {
+                    
                         getAppResult=[[UIApplication sharedApplication] openURL:[NSURL URLWithString:typeurl]];
                         
                         NSLog(@"StartApp url scheme found");
-                        
-                    }
-                    else{
-                        NSLog(@"StartApp url scheme not found load in browser");
-                        getAppResult=[[UIApplication sharedApplication] openURL:[NSURL URLWithString:appurl]];
-                        
-                        
-                    }
-                    
-                }
+                                     }
                 @catch (NSException *e) {
                     NSLog(@"StartApp app error %@", e.description);
                     getAppResult=NO;
+                    
                 }
                 
                 
@@ -113,8 +104,20 @@ CDVPluginResult* apppluginResult = nil;
                     apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:resultType];
                 }
                 else{
-                                            NSLog(@"StartApp app error");
+                    //NSLog(@"StartApp app error");
+                    NSLog(@"StartApp url scheme not found load in browser");
+                    
+                    @try {
+                        getAppResult=[[UIApplication sharedApplication] openURL:[NSURL URLWithString:appurl]];
+                    }
+                    @catch (NSException *e) {
+                        NSLog(@"StartApp app error %@", e.description);
+                        getAppResult=NO;
+                        
                         apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Error: App not found"];
+                        
+                    }
+                    
                     
                 }
                 
