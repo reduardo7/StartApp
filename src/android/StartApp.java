@@ -89,6 +89,11 @@ public class StartApp extends CordovaPlugin {
                             Log.d("StartApp"," call instagram");
                             openInstagram(appid,apptype);
                         }
+                        else if(apptype.equals("website"))
+                        {
+                            Log.d("StartApp"," call website");
+                            openWeb(appid,apptype);
+                        }
                         callbackContext.success();
 
                     }
@@ -147,7 +152,7 @@ public class StartApp extends CordovaPlugin {
             i = new Intent(Intent.ACTION_VIEW, Uri.parse(appurl));
 
         }catch (Exception e) {
-            Log.d("StartApp","openTwitterPage In exception");
+            Log.d("StartApp", "openTwitterPage In exception");
             i = new Intent(Intent.ACTION_VIEW, Uri.parse(appurl));
         }
 
@@ -214,6 +219,24 @@ public class StartApp extends CordovaPlugin {
         }
 
         checkIfAppExists(i, apptype);
+    }
+
+    //Twitter
+
+    public void openWeb(String appid, String apptype){
+        Intent i = null;
+        Log.d("StartApp","In openWeb");
+
+        try {
+            Log.d("StartApp","openWeb In try");
+            i = new Intent(Intent.ACTION_VIEW, Uri.parse(appurl));
+
+        }catch (Exception e) {
+            Log.d("StartApp","openWeb In exception");
+            i = new Intent(Intent.ACTION_VIEW, Uri.parse(appurl));
+        }
+
+        this.cordova.getActivity().startActivity(i);
     }
 
     // method to check whether an app exists or not
