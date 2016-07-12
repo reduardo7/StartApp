@@ -89,6 +89,11 @@ public class StartApp extends CordovaPlugin {
                             Log.d("StartApp"," call instagram");
                             openInstagram(appid,apptype);
                         }
+                        else if(apptype.equals("snapchat"))
+                        {
+                            Log.d("StartApp"," call snapchat");
+                            openSnapchat(appid,apptype);
+                        }
                         else if(apptype.equals("website"))
                         {
                             Log.d("StartApp"," call website");
@@ -220,8 +225,30 @@ public class StartApp extends CordovaPlugin {
 
         checkIfAppExists(i, apptype);
     }
+        //Snapchat
+    public void openSnapchat(String appid, String apptype){
+        Intent i = null;
+        Log.d("StartApp","In openSnapchat");
 
-    //Twitter
+        try {
+            Log.d("StartApp","openSnapchat In try");
+            this.cordova.getActivity().getApplicationContext().getPackageManager().getPackageInfo(appid, 0);
+
+            Log.d("StartApp","openSnapchat url : "+appurl);
+
+            i=new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(appurl));
+            //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }catch (Exception e) {
+            Log.d("StartApp", "openSnapchat In exception");
+
+            // try to use other intent
+            i = new Intent(Intent.ACTION_VIEW, Uri.parse(appurl));
+        }
+
+        checkIfAppExists(i, apptype);
+    }
+    //Web
 
     public void openWeb(String appid, String apptype){
         Intent i = null;
