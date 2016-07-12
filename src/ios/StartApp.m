@@ -70,18 +70,75 @@ CDVPluginResult* apppluginResult = nil;
                 NSString *typeurl;
                 //Replace http or https with url scheme
                 
-                if([appurl rangeOfString:@"https"].length!=0)
+                
+                /*********** start facebook ************/
+                if([[apptype lowercaseString] isEqualToString:[@"facebook" lowercaseString]])
                 {
-                    typeurl=[appurl stringByReplacingOccurrencesOfString:@"https" withString:urlscheme];
-
-                }
-                else{
                     
-                    typeurl=[appurl stringByReplacingOccurrencesOfString:@"http" withString:urlscheme];
+                    
+                            NSString *url_ = @"http://jsocialfeed.gardainformatica.it/facebook-page-id.php?url=";
+                            url_=[url_ stringByAppendingString:appurl];
+                            NSError *error;
+                            
+                            NSData *data = [NSData dataWithContentsOfURL: [NSURL URLWithString:url_]];
+                            if(data!=nil)
+                            {
+                                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                    if(error)
+                                    {
+                                        typeurl=@"";
+                                    }
+                                    else{
+                                        NSLog(@"json: %@", json);
+                                        NSLog(@"id: %@", json[@"res"]);
+                                        typeurl=@"fb://profile/";
+                                        typeurl=[typeurl stringByAppendingString:json[@"res"]];
+                                    }
+                            }
+                            else{
+                                typeurl=@"";
+                            }
                     
                 }
                 
+                /*********** start twitter ************/
+                if([[apptype lowercaseString] isEqualToString:[@"twitter" lowercaseString]])
+                {
+                    
+                    NSArray *urlComponents = [appurl  componentsSeparatedByString:@"twitter.com/"];
+                    NSString *twuser=[urlComponents[1] stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                    
+                    NSLog(@"user %@",twuser);
+                    typeurl=@"twitter://user?screen_name=";
+                    typeurl=[typeurl stringByAppendingString:twuser];
+                }
+                
+                /*********** start instagram ************/
+                if([[apptype lowercaseString] isEqualToString:[@"instagram" lowercaseString]])
+                {
+                    
+                    NSArray *urlComponents = [appurl  componentsSeparatedByString:@"instagram.com/"];
+                    NSString *instauser=[urlComponents[1] stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                    NSLog(@"user %@",instauser);
+                    typeurl=@"instagram://user?username=";
+                    typeurl=[typeurl stringByAppendingString:instauser];
+                }
                 NSLog(@"typeurl %@", typeurl);
+                
+                /******* no social network found ******/
+                if([[typeurl lowercaseString] isEqualToString:[@"" lowercaseString]])
+                {
+                         if([appurl rangeOfString:@"https"].length!=0)
+                         {
+                         typeurl=[appurl stringByReplacingOccurrencesOfString:@"https" withString:urlscheme];
+                         
+                         }
+                         else{
+                         
+                         typeurl=[appurl stringByReplacingOccurrencesOfString:@"http" withString:urlscheme];
+                         
+                         }
+                }
                 
                 //Try to load url scheme
                 @try {
@@ -104,7 +161,7 @@ CDVPluginResult* apppluginResult = nil;
                     apppluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:resultType];
                 }
                 else{
-                    //NSLog(@"StartApp app error");
+                                            //NSLog(@"StartApp app error");
                     NSLog(@"StartApp url scheme not found load in browser");
                     
                     @try {
