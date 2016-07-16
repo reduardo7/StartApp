@@ -37,15 +37,19 @@ linkedin                                linkedin
 From index.js you may call plugin by passing parameters.
 
 
-var successcall = function(result) {
+    var successcall = function(result) {
         console.log("startapp SUCCESS: \r\n"+result );
     };
     
     var failurecall = function(error) {
         console.error("startapp ERROR: \r\n"+error );
     };
-    window.startapp.start(
-                        {
-                          result:'success', appid:'com.atebits.Tweetie2',apptype:'twitter',urlscheme:'twitter',appurl:'https://twitter.com/mshahidjanjua'
-                         },successcall,failurecall);
+    
+    window.startapp.start({
+        result: 'success',
+        appid: 'com.atebits.Tweetie2',
+        apptype: 'twitter',
+        urlscheme: 'twitter',
+        appurl: 'https://twitter.com/mshahidjanjua'
+    }, successcall, failurecall);
     
